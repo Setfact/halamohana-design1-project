@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { ContactBand, Shell } from '@/app/components';
 import { news } from '@/lib/content';
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return news.map((item) => ({ slug: item.slug }));
 }
