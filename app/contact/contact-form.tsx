@@ -22,13 +22,12 @@ export function ContactForm() {
 
     setStatus('loading');
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      if (apiUrl) {
-        const response = await fetch(`${apiUrl}/contact-message`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) });
-        if (!response.ok) throw new Error('Request failed');
-      } else {
-        await new Promise((resolve) => setTimeout(resolve, 700));
-      }
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error('Request failed');
       setForm(emptyForm);
       setStatus('success');
     } catch {

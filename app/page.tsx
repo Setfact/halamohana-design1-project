@@ -1,34 +1,36 @@
 import Link from 'next/link';
 import { ContactBand, ProjectCard, SectionHeading, Shell } from './components';
+import { HeroCarousel } from './hero-carousel';
 import { gallery, imageUrls, missions, news, projects, values } from '@/lib/content';
+import { getAbout, getBanners, missionItems, type Banner } from '@/services/api';
 
-export default function Home() {
+const fallbackBanner: Banner = {
+  id: 'local-hero',
+  title: 'Where hospitality meets possibility.',
+  image_url: imageUrls.hero,
+  is_active: true,
+  sort_order: 0,
+};
+
+export default async function Home() {
+  const [apiBanners, about] = await Promise.all([
+    getBanners().catch(() => []),
+    getAbout().catch(() => null),
+  ]);
+  const banners = apiBanners.length ? apiBanners : [fallbackBanner];
+  const currentMissions = missionItems(about?.mission);
+  const displayedMissions = currentMissions.length ? currentMissions : missions;
+
   return (
     <Shell active="home" overlay>
       <main>
-        <section className="hero" id="top">
-          <div className="hero-image" aria-hidden="true" />
-          <div className="hero-shade" aria-hidden="true" />
-          <div className="hero-orb hero-orb-one" aria-hidden="true" />
-          <div className="hero-orb hero-orb-two" aria-hidden="true" />
-          <div className="hero-content">
-            <p className="eyebrow light"><span /> Hospitality · Lifestyle · Property</p>
-            <h1>Where hospitality<br />meets <em>possibility.</em></h1>
-            <p className="hero-copy">We create integrated destinations designed for memorable stays, urban lifestyles, and meaningful experiences.</p>
-            <div className="hero-actions">
-              <Link className="button button-primary" href="/projects">Explore Projects <span>↗</span></Link>
-              <Link className="button button-glass" href="/about">Discover our story <span>↓</span></Link>
-            </div>
-          </div>
-          <div className="hero-meta"><p>Part of</p><strong>MAHADASHA</strong></div>
-          <a className="scroll-cue" href="#overview"><span>Scroll</span><i /></a>
-        </section>
+        <HeroCarousel banners={banners} />
 
         <section className="overview section" id="overview">
           <div className="container overview-grid">
-            <div><p className="eyebrow"><span /> Who we are</p><h2>Creating places where<br /><em>people feel at home.</em></h2></div>
+            <div><p className="eyebrow"><span /> Who we are</p><h2>{about?.title || <>Creating places where<br /><em>people feel at home.</em></>}</h2></div>
             <div className="overview-copy">
-              <p>PT Halla Mohana provides thoughtfully designed hospitality and lifestyle destinations that bring together comfort, connection, and opportunity.</p>
+              <p>{about?.description || 'PT Halla Mohana provides thoughtfully designed hospitality and lifestyle destinations that bring together comfort, connection, and opportunity.'}</p>
               <Link className="text-link" href="/about">More about us <span>↗</span></Link>
             </div>
           </div>
@@ -52,12 +54,12 @@ export default function Home() {
             <div className="vision-statement">
               <p className="eyebrow"><span /> Our direction</p>
               <span className="quote-mark">“</span>
-              <h2>Deliver innovative hospitality products and services that create <em>lasting value.</em></h2>
+              <h2>{about?.vision || <>Deliver innovative hospitality products and services that create <em>lasting value.</em></>}</h2>
               <p>Our vision</p>
             </div>
             <div className="mission-list">
               <h3>How we move forward</h3>
-              {missions.map((mission, index) => <div key={mission}><span>0{index + 1}</span><p>{mission}</p></div>)}
+              {displayedMissions.map((mission, index) => <div key={mission}><span>{String(index + 1).padStart(2, '0')}</span><p>{mission}</p></div>)}
             </div>
           </div>
         </section>

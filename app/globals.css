@@ -42,7 +42,7 @@ button, input, textarea { font: inherit; }
 .nav-cta span, .button span, .text-link span, .project-info a span { margin-left: 9px; }
 
 .hero { color: #fff; min-height: 780px; height: 100svh; overflow: hidden; position: relative; }
-.hero-image { animation: slowZoom 18s ease-out both; background-image: url('https://images.unsplash.com/photo-1742844551986-de16fd4682c3?auto=format&fit=crop&w=2200&q=90'); background-position: center 58%; background-size: cover; inset: 0; position: absolute; }
+.hero-image { animation: heroReveal .55s ease-out both, slowZoom 18s ease-out both; height: 100%; inset: 0; object-fit: cover; object-position: center 58%; position: absolute; width: 100%; }
 .hero-shade { background: linear-gradient(90deg, rgba(18,25,20,.77) 0%, rgba(18,25,20,.43) 48%, rgba(18,25,20,.15) 74%), linear-gradient(0deg, rgba(20,24,21,.34), transparent 45%); inset: 0; position: absolute; }
 .hero-orb { border: 1px solid rgba(255,255,255,.15); border-radius: 50%; position: absolute; }
 .hero-orb-one { height: 560px; right: -160px; top: 85px; width: 560px; }
@@ -67,6 +67,12 @@ button, input, textarea { font: inherit; }
 .scroll-cue { align-items: center; bottom: 42px; display: flex; font-size: 9px; gap: 14px; left: 8.2vw; letter-spacing: .18em; position: absolute; text-transform: uppercase; z-index: 2; }
 .scroll-cue i { background: rgba(255,255,255,.32); height: 1px; position: relative; width: 66px; }
 .scroll-cue i::after { animation: scrollLine 2s infinite; background: #fff; content: ''; height: 1px; left: 0; position: absolute; width: 25px; }
+.hero-carousel-controls { align-items: center; bottom: 41px; display: flex; gap: 12px; left: 50%; position: absolute; transform: translateX(-50%); z-index: 3; }
+.hero-carousel-controls > button { align-items: center; background: rgba(20,24,21,.24); border: 1px solid rgba(255,255,255,.42); border-radius: 50%; color: #fff; cursor: pointer; display: flex; height: 38px; justify-content: center; transition: background .2s, border-color .2s; width: 38px; }
+.hero-carousel-controls > button:hover { background: rgba(255,255,255,.18); border-color: #fff; }
+.hero-carousel-dots { align-items: center; display: flex; gap: 8px; }
+.hero-carousel-dots button { background: rgba(255,255,255,.45); border: 0; border-radius: 999px; cursor: pointer; height: 7px; padding: 0; transition: background .2s, width .2s; width: 7px; }
+.hero-carousel-dots button.active { background: #fff; width: 24px; }
 
 .overview { background: var(--cream); }
 .overview-grid { align-items: start; display: grid; gap: 11%; grid-template-columns: 1.15fr .85fr; }
@@ -96,6 +102,7 @@ h2 em { color: var(--green); }
 .project-info a { font-size: 12px; font-weight: 750; }
 
 @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.06); } }
+@keyframes heroReveal { from { opacity: .45; } to { opacity: 1; } }
 @keyframes scrollLine { 0% { left: 0; } 60%, 100% { left: 41px; } }
 
 @media (max-width: 900px) {
@@ -116,6 +123,7 @@ h2 em { color: var(--green); }
   .hero-meta { display: none; }
   .hero-copy { font-size: 15px; }
   .scroll-cue { bottom: 26px; }
+  .hero-carousel-controls { bottom: 78px; left: 24px; transform: none; }
   .stats { grid-template-columns: 1fr 1fr; gap: 28px 0; margin-top: 58px; }
   .stats > div:nth-child(3) { border-left: 0; padding-left: 0; }
   .section-heading { align-items: start; flex-direction: column; gap: 20px; }
