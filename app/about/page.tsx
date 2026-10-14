@@ -1,4 +1,4 @@
-import { ContactBand, PageHero, SectionHeading, Shell } from '../components';
+import { ContactBand, PageHero, SectionHeading, Shell, ValueCard } from '../components';
 import { imageUrls, leadershipTraits, missions, values } from '@/lib/content';
 import { getAbout, missionItems } from '@/services/api';
 
@@ -38,7 +38,11 @@ export default async function AboutPage() {
 
         <section className="section about-values" id="values">
           <div className="container"><SectionHeading eyebrow="Our core values" title="The principles behind" accent="everything we do." copy="They guide how we work, collaborate, and create experiences our guests can trust." /></div>
-          <div className="container value-grid about-value-grid">{values.map((value) => <article className="value-card" key={value.title}><span>{value.number}</span><i /><h3>{value.title}</h3><p>{value.copy}</p></article>)}</div>
+          <div className="container value-grid about-value-grid">
+            {values.map((value) => (
+              <ValueCard key={value.title} value={value} />
+            ))}
+          </div>
           <div className="container leadership-block">
             <p className="eyebrow"><span /> Leadership traits</p>
             <div>{leadershipTraits.map((trait, index) => <span key={trait}><b>0{index + 1}</b>{trait}</span>)}</div>

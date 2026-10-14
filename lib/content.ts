@@ -13,13 +13,71 @@ export const imageUrls = {
   construction: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=88',
 };
 
-export const values = [
-  { number: '01', title: 'Integrity', copy: 'Doing what is right, consistently and transparently.' },
-  { number: '02', title: 'Continuous Development', copy: 'Always learning, improving, and creating room to grow.' },
-  { number: '03', title: 'Excellence', copy: 'Delivering thoughtful quality in every guest experience.' },
-  { number: '04', title: 'Proactive', copy: 'Seeing possibilities early and moving with purpose.' },
-  { number: '05', title: 'Accountability', copy: 'Owning our decisions, outcomes, and commitments.' },
-  { number: '06', title: 'Teamwork', copy: 'Growing stronger through trust and collaboration.' },
+export type CompanyValue = {
+  number: string;
+  title: string;
+  copy: string;
+  image: string;
+  tag: string;
+  icon: 'ShieldCheck' | 'TrendingUp' | 'Sparkles' | 'Compass' | 'Award' | 'Users';
+  color: string;
+};
+
+export const values: CompanyValue[] = [
+  {
+    number: '01',
+    title: 'Integrity',
+    copy: 'Doing what is right, consistently and transparently.',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85',
+    tag: 'Trust & Governance',
+    icon: 'ShieldCheck',
+    color: '#2b6754',
+  },
+  {
+    number: '02',
+    title: 'Continuous Development',
+    copy: 'Always learning, improving, and creating room to grow.',
+    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=85',
+    tag: 'Growth & Innovation',
+    icon: 'TrendingUp',
+    color: '#d97736',
+  },
+  {
+    number: '03',
+    title: 'Excellence',
+    copy: 'Delivering thoughtful quality in every guest experience.',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=85',
+    tag: 'Hospitality Quality',
+    icon: 'Sparkles',
+    color: '#c8385a',
+  },
+  {
+    number: '04',
+    title: 'Proactive',
+    copy: 'Seeing possibilities early and moving with purpose.',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=85',
+    tag: 'Visionary Purpose',
+    icon: 'Compass',
+    color: '#2b6754',
+  },
+  {
+    number: '05',
+    title: 'Accountability',
+    copy: 'Owning our decisions, outcomes, and commitments.',
+    image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85',
+    tag: 'Ownership & Rigor',
+    icon: 'Award',
+    color: '#d97736',
+  },
+  {
+    number: '06',
+    title: 'Teamwork',
+    copy: 'Growing stronger through trust and collaboration.',
+    image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=85',
+    tag: 'People & Synergy',
+    icon: 'Users',
+    color: '#c8385a',
+  },
 ];
 
 export const missions = [

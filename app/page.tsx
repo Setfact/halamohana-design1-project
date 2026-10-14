@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ContactBand, ProjectCard, SectionHeading, Shell } from './components';
+import { ContactBand, ProjectCard, SectionHeading, Shell, ValueCard } from './components';
 import { HeroCarousel } from './hero-carousel';
 import { gallery, imageUrls, missions, news, projects, values } from '@/lib/content';
 import { getAbout, getBanners, missionItems, type Banner } from '@/services/api';
@@ -67,7 +67,9 @@ export default async function Home() {
         <section className="values-section section">
           <div className="container"><SectionHeading eyebrow="What guides us" title="Values we live by," accent="every day." copy="Six principles shape our decisions, our partnerships, and every experience we create." /></div>
           <div className="container value-grid">
-            {values.map((value) => <article className="value-card" key={value.title}><span>{value.number}</span><i aria-hidden="true" /><h3>{value.title}</h3><p>{value.copy}</p></article>)}
+            {values.map((value) => (
+              <ValueCard key={value.title} value={value} />
+            ))}
           </div>
           <div className="container centered-link"><Link className="text-link" href="/about#values">Discover our culture <span>↗</span></Link></div>
         </section>

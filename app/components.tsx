@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { useEffect, useState, type ReactNode } from 'react';
-import type { projects } from '@/lib/content';
+import { ShieldCheck, TrendingUp, Sparkles, Compass, Award, Users } from 'lucide-react';
+import type { projects, CompanyValue } from '@/lib/content';
 
 const navigation = [
   { label: 'Home', href: '/' },
@@ -122,6 +123,42 @@ export function ProjectCard({ project, index }: { project: (typeof projects)[num
         <p>{project.category} · {project.location}</p>
         <h3>{project.title}</h3>
         <Link href={`/projects/${project.slug}`}>View project <span>↗</span></Link>
+      </div>
+    </article>
+  );
+}
+
+const valueIcons = {
+  ShieldCheck,
+  TrendingUp,
+  Sparkles,
+  Compass,
+  Award,
+  Users,
+};
+
+export function ValueCard({ value }: { value: CompanyValue }) {
+  const IconComponent = valueIcons[value.icon] ?? ShieldCheck;
+
+  return (
+    <article className="value-card">
+      <div className="value-card-media">
+        <img src={value.image} alt={value.title} loading="lazy" />
+        <div className="value-media-overlay" />
+        <div className="value-badge" style={{ '--accent-color': value.color } as React.CSSProperties}>
+          <span className="value-num">{value.number}</span>
+          <span className="value-icon-wrap" style={{ backgroundColor: value.color }}>
+            <IconComponent size={13} strokeWidth={2.4} color="#ffffff" />
+          </span>
+        </div>
+        {value.tag && <span className="value-tag">{value.tag}</span>}
+      </div>
+      <div className="value-card-body">
+        <div className="value-card-header">
+          <span className="value-accent-bar" style={{ backgroundColor: value.color }} />
+          <h3>{value.title}</h3>
+        </div>
+        <p>{value.copy}</p>
       </div>
     </article>
   );
